@@ -15,8 +15,8 @@ urlpatterns = [
     path('task/', insights_views.task_view, name='task_random'),
     path('verification/', insights_views.verification_view, name='verification'),
     path('callback/', insights_views.conversion_callback, name='callback'),
-    path('admin/sync-offers/', insights_views.sync_offers_view, name='admin:sync_offers'),
-    path('admin/revenue-dashboard/', insights_views.revenue_dashboard_view, name='admin:revenue_dashboard'),
+    path('admin/sync-offers/', insights_views.sync_offers_view, name='sync_offers'),
+    path('admin/revenue-dashboard/', insights_views.revenue_dashboard_view, name='revenue_dashboard'),
 ]
 
 # Custom error pages
