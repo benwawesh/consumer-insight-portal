@@ -36,6 +36,7 @@ class CPAGripAPIService:
             'user_id': self.user_id,
             'key': self.private_key,
             'country': '000',
+            'num_offers': 500,
         }
 
         try:
