@@ -2,10 +2,10 @@ services:
   - type: web
     name: consumer-insight-portal
     runtime: python
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
     startCommand: gunicorn affiliate.wsgi:application
     envVars:
-      - key: DB_ENGINE
-        value: django.db.backends.postgresql
       - key: DEBUG
         value: "False"
+      - key: ALLOWED_HOSTS
+        value: "consumer-insight-portal.onrender.com"
