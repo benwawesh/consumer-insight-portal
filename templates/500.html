@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Server Error - Consumer Insight Portal{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 text-center">
+        <div>
+            <div class="bg-trust-50 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-6xl font-bold text-trust-600">500</span>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">Server Error</h1>
+            <p class="text-gray-600 mb-8">
+                We're sorry, but something went wrong on our end. 
+                Our team has been notified and we're working to fix the issue.
+            </p>
+            <div class="space-y-4">
+                <a href="{% url 'home' %}" class="inline-block trust-gradient text-white font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity duration-200">
+                    Return to Home
+                </a>
+                <br>
+                <a href="mailto:support@consumerinsightportal.com" class="inline-block text-trust-600 font-semibold hover:text-trust-700 transition-colors duration-200">
+                    Contact Support →
+                </a>
+            </div>
+        </div>
+        
+        <div class="bg-blue-50 border border-trust-200 rounded-lg p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">What you can do:</h3>
+            <ul class="text-left text-gray-600 space-y-2">
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Try refreshing the page</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Check your internet connection</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Come back later and try again</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

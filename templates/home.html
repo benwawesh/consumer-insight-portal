@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}Consumer Insight Portal - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="trust-gradient text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                Share Your Opinions,<br>Earn Rewards
+            </h1>
+            <p class="text-xl md:text-2xl text-trust-100 mb-8 max-w-3xl mx-auto">
+                Join thousands of consumers participating in professional market research studies. 
+                Your insights help shape better products and services.
+            </p>
+            <a href="{% url 'offers' %}" class="inline-block bg-white text-trust-600 font-semibold px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors duration-200 shadow-lg">
+                View Available Offers
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Participate?</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                We maintain the highest standards in market research. Your participation is secure, 
+                confidential, and valued.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="text-center p-6">
+                <div class="bg-trust-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-trust-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Earn Rewards</h3>
+                <p class="text-gray-600">
+                    Get compensated for your time with cash rewards for completing market research surveys and studies.
+                </p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="text-center p-6">
+                <div class="bg-trust-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-trust-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">100% Secure</h3>
+                <p class="text-gray-600">
+                    Your personal information is protected with enterprise-grade security and never shared without consent.
+                </p>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="text-center p-6">
+                <div class="bg-trust-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-trust-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Flexible Participation</h3>
+                <p class="text-gray-600">
+                    Complete surveys on your own schedule. No commitments, no obligations - participate when you want.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Getting started is simple. Follow these three easy steps to begin earning rewards.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Step 1 -->
+            <div class="relative">
+                <div class="bg-white rounded-lg shadow-md p-6 h-full">
+                    <div class="flex items-center justify-center w-12 h-12 bg-trust-600 text-white rounded-full font-bold text-xl mb-4">
+                        1
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Browse Offers</h3>
+                    <p class="text-gray-600">
+                        View available market research opportunities and select ones that interest you. All offers are vetted and verified.
+                    </p>
+                </div>
+                <div class="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                    <svg class="w-8 h-8 text-trust-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="relative">
+                <div class="bg-white rounded-lg shadow-md p-6 h-full">
+                    <div class="flex items-center justify-center w-12 h-12 bg-trust-600 text-white rounded-full font-bold text-xl mb-4">
+                        2
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Complete Survey</h3>
+                    <p class="text-gray-600">
+                        Participate in the survey or research study. Answer questions honestly and thoroughly - your opinions matter.
+                    </p>
+                </div>
+                <div class="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                    <svg class="w-8 h-8 text-trust-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div>
+                <div class="bg-white rounded-lg shadow-md p-6 h-full">
+                    <div class="flex items-center justify-center w-12 h-12 bg-trust-600 text-white rounded-full font-bold text-xl mb-4">
+                        3
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Get Rewarded</h3>
+                    <p class="text-gray-600">
+                        Receive your reward once your participation is verified. Fast, reliable payments for your valuable time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-trust-50 rounded-2xl p-8 md:p-12 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to Get Started?</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                Join thousands of participants who are already earning rewards by sharing their opinions. 
+                It's free, secure, and takes just a few minutes to begin.
+            </p>
+            <a href="{% url 'offers' %}" class="inline-block trust-gradient text-white font-semibold px-8 py-4 rounded-lg hover:opacity-90 transition-opacity duration-200 shadow-lg">
+                Browse Available Offers
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

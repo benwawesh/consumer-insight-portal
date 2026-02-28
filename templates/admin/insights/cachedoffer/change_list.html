@@ -1,0 +1,42 @@
+{% extends "admin/change_list.html" %}
+
+{% load i18n admin_urls %}
+
+{% block object-tools-items %}
+    {{ block.super }}
+    {% if sync_button %}
+        <li>
+            <a href="{% url 'admin:insights_cachedoffer_sync' %}" class="button" 
+               style="background: linear-gradient(135deg, #0086ff 0%, #003e91 100%); 
+                      color: white; 
+                      padding: 10px 20px; 
+                      border-radius: 6px; 
+                      text-decoration: none; 
+                      font-weight: bold;
+                      display: inline-block;
+                      box-shadow: 0 2px 4px rgba(0, 134, 255, 0.3);
+                      transition: all 0.3s ease;">
+                <span style="font-size: 1.2em; margin-right: 8px;">↻</span>
+                Sync with CPAGrip
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <style>
+        /* Hover effect for sync button */
+        a[href*="sync-cpargip"] {
+            transition: all 0.3s ease !important;
+        }
+        a[href*="sync-cpargip"]:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 8px rgba(0, 134, 255, 0.4) !important;
+        }
+        a[href*="sync-cpargip"]:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 2px 4px rgba(0, 134, 255, 0.3) !important;
+        }
+    </style>
+{% endblock %}

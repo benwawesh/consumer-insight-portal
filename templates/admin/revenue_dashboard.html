@@ -1,0 +1,139 @@
+{% extends "admin/base_site.html" %}
+
+{% block extrastyle %}
+<style>
+    .stat-card {
+        background: linear-gradient(135deg, #0086ff 0%, #003e91 100%);
+        border-radius: 12px;
+        padding: 20px;
+        color: white;
+    }
+    .stat-label {
+        font-size: 0.875rem;
+        opacity: 0.9;
+        margin-bottom: 8px;
+    }
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 0;
+    }
+    .stat-comparison {
+        font-size: 0.875rem;
+        opacity: 0.8;
+        margin-top: 8px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <div class="module" style="background: linear-gradient(135deg, #0086ff 0%, #003e91 100%); color: white; padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+        <h1 style="color: white; margin: 0; font-size: 2rem;">📊 Revenue Monitor Dashboard</h1>
+        <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0;">Real-time earnings, conversions, and performance metrics</p>
+    </div>
+
+    <div class="module" style="margin-bottom: 24px;">
+        <h2 style="margin: 0 0 20px 0;">Today's Performance</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+            <div class="stat-card">
+                <div class="stat-label">Today's Revenue</div>
+                <div class="stat-value">${{ today_revenue|floatformat:2 }}</div>
+                <div class="stat-comparison">Yesterday: ${{ yesterday_revenue|floatformat:2 }}</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Today's Conversions</div>
+                <div class="stat-value">{{ today_count }}</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Earnings Per Click (EPC)</div>
+                <div class="stat-value">${{ epc|floatformat:2 }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="module" style="margin-bottom: 24px;">
+        <h2 style="margin: 0 0 20px 0;">Weekly Overview</h2>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px;">
+            <div style="background: #e0effe; padding: 20px; border-radius: 8px;">
+                <h3 style="color: #003e91; margin: 0 0 10px 0;">Weekly Revenue</h3>
+                <p style="font-size: 1.75rem; font-weight: bold; color: #0086ff; margin: 0;">${{ week_revenue|floatformat:2 }}</p>
+            </div>
+            <div style="background: #e0effe; padding: 20px; border-radius: 8px;">
+                <h3 style="color: #003e91; margin: 0 0 10px 0;">Weekly Conversions</h3>
+                <p style="font-size: 1.75rem; font-weight: bold; color: #0086ff; margin: 0;">{{ week_count }}</p>
+            </div>
+        </div>
+        
+        <!-- Daily Revenue Chart -->
+        <div style="margin-top: 20px; padding: 20px; background: #fafafa; border-radius: 8px;">
+            <h3 style="margin: 0 0 15px 0;">Daily Revenue (Last 7 Days)</h3>
+            <div style="display: flex; align-items: flex-end; gap: 15px; height: 200px;">
+                {% for day in daily_revenue %}
+                <div style="flex: 1; text-align: center;">
+                    <div style="height: {{ day.revenue|floatformat:0 }}px; background: #0086ff; border-radius: 4px 4px 0 0; min-height: 2px;"></div>
+                    <p style="font-size: 0.875rem; margin: 5px 0 0 0;">${{ day.revenue|floatformat:2 }}</p>
+                    <p style="font-size: 0.75rem; color: #999; margin: 0;">{{ day.date }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="module" style="margin-bottom: 24px;">
+        <h2 style="margin: 0 0 20px 0;">All-Time Statistics</h2>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+            <div style="padding: 15px; background: #e0effe; border-radius: 8px;">
+                <strong style="display: block; margin-bottom: 8px;">Total Revenue</strong>
+                <span style="font-size: 1.5rem; font-weight: bold; color: #0086ff;">${{ total_revenue|floatformat:2 }}</span>
+            </div>
+            <div style="padding: 15px; background: #e0effe; border-radius: 8px;">
+                <strong style="display: block; margin-bottom: 8px;">Total Conversions</strong>
+                <span style="font-size: 1.5rem; font-weight: bold; color: #0086ff;">{{ total_count }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="module" style="margin-bottom: 24px;">
+        <h2 style="margin: 0 0 20px 0;">Top Performing Offers</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f5f5f5;">
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Offer Name</th>
+                    <th style="padding: 12px; text-align: right; border-bottom: 2px solid #ddd;">Conversions</th>
+                    <th style="padding: 12px; text-align: right; border-bottom: 2px solid #ddd;">Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for offer in top_offers %}
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 12px;">{{ offer.offer_name }}</td>
+                    <td style="padding: 12px; text-align: right;">{{ offer.conversions }}</td>
+                    <td style="padding: 12px; text-align: right; font-weight: bold; color: #0086ff;">${{ offer.revenue|floatformat:2 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" style="padding: 12px; text-align: center; color: #999;">No data available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="module">
+        <h2 style="margin: 0 0 20px 0;">Device Type Distribution</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            {% for stat in device_stats %}
+            <div style="padding: 15px; background: #e0effe; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #0086ff; margin-bottom: 8px;">{{ stat.count }}</div>
+                <div style="color: #003e91; font-weight: 500;">{{ stat.device_type|title }}</div>
+            </div>
+            {% empty %}
+            <div style="padding: 15px; background: #e0effe; border-radius: 8px; text-align: center; color: #999;">
+                No device data available
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
