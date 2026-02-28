@@ -35,7 +35,7 @@ class CPAGripAPIService:
         params = {
             'user_id': self.user_id,
             'key': self.private_key,
-            'country': '0',
+            'country': '000',
         }
 
         try:
