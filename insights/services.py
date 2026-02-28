@@ -32,31 +32,37 @@ class CPAGripAPIService:
         """
         all_offers = {}
 
-        params = {
-            'user_id': self.user_id,
-            'key': self.private_key,
-        }
+        countries = [
+            'US', 'GB', 'CA', 'AU', 'DE', 'FR', 'ES', 'IT', 'NL', 'CH',
+            'AT', 'BE', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO',
+            'GR', 'PT', 'BG', 'SI', 'HR', 'SK', 'IN', 'PH', 'BR', 'ZA',
+            'NG', 'MY', 'SG', 'TH', 'ID', 'VN', 'PK', 'EG', 'SA', 'AE',
+            'TR', 'MX', 'AR', 'CO', 'PE', 'CL', 'KE', 'KW', 'BW', 'GH',
+        ]
 
-        try:
-            response = requests.get(
-                self.api_url,
-                params=params,
-                timeout=30
-            )
-            response.raise_for_status()
-
-            data = response.json()
-
-            if isinstance(data, dict) and 'offers' in data:
-                for offer in data['offers']:
-                    offer_id = offer.get('offer_id')
-                    if offer_id and offer_id not in all_offers:
-                        all_offers[offer_id] = offer
-                logger.info(f"Fetched {len(all_offers)} unique offers from CPAGrip")
-
-        except Exception as e:
-            logger.error(f"Failed to fetch offers: {e}")
-            return None
+        for country in countries:
+            params = {
+                'user_id': self.user_id,
+                'key': self.private_key,
+                'country': country,
+            }
+            try:
+                response = requests.get(
+                    self.api_url,
+                    params=params,
+                    timeout=8
+                )
+                response.raise_for_status()
+                data = response.json()
+                if isinstance(data, dict) and 'offers' in data:
+                    for offer in data['offers']:
+                        offer_id = offer.get('offer_id')
+                        if offer_id and offer_id not in all_offers:
+                            all_offers[offer_id] = offer
+                    logger.info(f"{country}: {len(data['offers'])} offers (total unique: {len(all_offers)})")
+            except Exception as e:
+                logger.warning(f"Failed for {country}: {e}")
+                continue
 
         if not all_offers:
             logger.error("No offers returned from CPAGrip API")
