@@ -2,8 +2,8 @@ services:
   - type: web
     name: consumer-insight-portal
     runtime: python
-    buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
-    startCommand: gunicorn affiliate.wsgi:application
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: python manage.py migrate && gunicorn affiliate.wsgi:application
     envVars:
       - key: DEBUG
         value: "False"
