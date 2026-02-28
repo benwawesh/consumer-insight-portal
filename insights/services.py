@@ -49,7 +49,7 @@ class CPAGripAPIService:
                 response = requests.get(
                     self.api_url,
                     params=params,
-                    timeout=30
+                    timeout=10
                 )
                 response.raise_for_status()
                 
