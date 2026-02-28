@@ -26,53 +26,43 @@ class CPAGripAPIService:
     
     def fetch_offers(self):
         """
-        Fetch offers from CPAGrip API
-        CPAGrip API is geolocation-based, so we need to query multiple countries to get ALL offers
-        
+        Fetch offers from CPAGrip API using country=0 to get all offers at once.
+
         Returns: List of offer dictionaries or None if failed
         """
-        # Countries to query for maximum offer coverage
-        countries = ['US', 'GB', 'CA', 'AU', 'DE', 'FR', 'ES', 'IT', 'NL', 'IN', 'PH', 'BR', 
-                     'ZA', 'NG', 'MY', 'SG', 'TH', 'ID', 'VN', 'PK', 'EG', 'SA', 'AE', 'TR', 
-                     'MX', 'AR', 'CO', 'PE', 'CL', 'KE']
-        
         all_offers = {}
-        
-        for country in countries:
-            params = {
-                'user_id': self.user_id,
-                'key': self.private_key,
-                'country': country,
-            }
-            
-            try:
-                response = requests.get(
-                    self.api_url,
-                    params=params,
-                    timeout=10
-                )
-                response.raise_for_status()
-                
-                data = response.json()
-                
-                # CPAGrip API returns data as a dict with 'general' and 'offers' keys
-                if isinstance(data, dict) and 'offers' in data:
-                    offers = data['offers']
-                    for offer in offers:
-                        offer_id = offer.get('offer_id')
-                        if offer_id and offer_id not in all_offers:
-                            all_offers[offer_id] = offer
-                    
-                    logger.info(f"Fetched {len(offers)} offers for {country} (total unique: {len(all_offers)})")
-                
-            except Exception as e:
-                logger.warning(f"Failed to fetch offers for {country}: {e}")
-                continue
-        
-        if not all_offers:
-            logger.error("No offers fetched from any country")
+
+        params = {
+            'user_id': self.user_id,
+            'key': self.private_key,
+            'country': '0',
+        }
+
+        try:
+            response = requests.get(
+                self.api_url,
+                params=params,
+                timeout=30
+            )
+            response.raise_for_status()
+
+            data = response.json()
+
+            if isinstance(data, dict) and 'offers' in data:
+                for offer in data['offers']:
+                    offer_id = offer.get('offer_id')
+                    if offer_id and offer_id not in all_offers:
+                        all_offers[offer_id] = offer
+                logger.info(f"Fetched {len(all_offers)} unique offers from CPAGrip")
+
+        except Exception as e:
+            logger.error(f"Failed to fetch offers: {e}")
             return None
-        
+
+        if not all_offers:
+            logger.error("No offers returned from CPAGrip API")
+            return None
+
         # Convert dict values to list
         offers_list = list(all_offers.values())
         logger.info(f"Fetched {len(offers_list)} total unique offers from CPAGrip across all countries")
