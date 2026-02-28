@@ -3,7 +3,7 @@ services:
     name: consumer-insight-portal
     runtime: python
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
-    startCommand: python manage.py migrate && gunicorn affiliate.wsgi:application
+    startCommand: python manage.py migrate && python manage.py createsuperuser --noinput || true && gunicorn affiliate.wsgi:application
     envVars:
       - key: DEBUG
         value: "False"
